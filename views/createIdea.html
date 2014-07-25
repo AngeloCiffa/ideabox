@@ -1,0 +1,38 @@
+<style>
+	.ng-invalid { background-color: lightpink; }
+	.ng-valid { background-color: lightgreen; }
+	span.error { color: red; font-weight: bold; }
+</style>
+
+<h2>Create a new idea</h2>
+<p>Please enter the ideas detail</p>
+<form name="ideaForm" novalidate>
+	<div class="well">
+		<h3>Title</h3>
+		<div class="form-group">
+			<label>Title</label>
+			<input name="title" class="form-control" ng-model="data.idea.title" required />
+			<span class="error" ng-show="ideaForm.title.$error.required">Please enter a title.</span>
+		</div>
+		<h3>Category</h3>
+		<div class="form-group">
+			<label>Category</label>
+			<input name="category" class="form-control" ng-model="data.idea.category" required />
+			<span class="error" ng-show="ideaForm.category.$error.required">Please enter a category.</span>
+		</div>
+		<h3>Description</h3>
+		<div class="form-group">
+			<label >Description</label>
+			<input name="description" class="form-control" ng-model="data.idea.description" required/>
+			<span class="error" ng-show ="ideaForm.description.$error.required">Please enter a description.</span>
+		</div>
+		<div class="form-group">
+			<label>Author</label>
+			<input name="author" class="form-control" ng-model="data.idea.author" required>
+			<span class="error" ng-show="ideaForm.author.$error.required"> Please enter a author.</span>
+		</div>		
+		<div class="text-center">
+			<button ng-disabled ="ideaForm.$invalid" ng-click="saveIdea(data.idea)" class="btn btn-primary">Save the idea</button>
+		</div>
+	</div>
+</form>

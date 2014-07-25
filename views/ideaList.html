@@ -1,0 +1,34 @@
+<div class="panel panel-default row" ng-controller="ideasListCtrl" ng-hide="data.error">
+	<div class="col-xs-11">
+		<input></input>
+	</div>
+</div>
+<div class="panel panel-default row" ng-controller="ideasListCtrl" ng-hide="data.error">
+	<div class="col-xs-3">
+		<a ng-click="selectCategory()" class="btn btn-block btn-default btn-lg">All</a>
+		<a ng-repeat="item in data.ideas | orderBy:'category' | unique:'category'" ng-class ="getCategoryClass(item)"
+		   ng-click= "selectCategory(item)" class= "btn btn-block btn-default btn-lg" >
+		   {{item}}
+		</a>
+	</div>
+	<div class="col-xs-8">
+		<div class="well" ng-repeat ="item in data.ideas | orderBy:'votes':true | filter : categoryFilterFn | range :selectedPage:pageSize " >
+			<h3 ng-click="getIdeaDetails(item)">
+				<strong>{{item.name}}</strong>
+				<span class="pull-right label label-primary">
+					{{ item.votes}}
+				</span>
+			</h3>
+			<button ng-click="upVote(item)" class="btn btn-success pull-right">
+				Vote for this
+			</button>
+			<span class="lead">{{item.description}}</span>
+		</div>
+		<div>
+			<a ng-repeat= "page in data.ideas | filter : categoryFilterFn | pageCount:pageSize"
+				ng-click="selectPage($index + 1)" class="btn btn-default" ng-class="getPageClass($index + 1)">
+				{{$index + 1}}
+			</a>
+		</div>
+	</div>
+</div>

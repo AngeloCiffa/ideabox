@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="ideaBox">
+	<head>
+		<title>Idea box</title>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script><!-- load angular -->
+		<link href="bootstrap.css" rel="stylesheet" />
+		<link href="bootstrap-theme.css" rel="stylesheet" />
+		<script>
+			angular.module("ideaBox", ["customFilters", "ngRoute"])
+			.config( function ($routeProvider){
+
+				$routeProvider.when("/ideaDetails", {
+					templateUrl: "/views/ideaDetails.html"
+				});
+
+				$routeProvider.when("/createidea", {
+					templateUrl: "/views/createIdea.html"
+				});
+				
+				$routeProvider.when("/ideas", {
+					templateUrl: "/views/ideaList.html"
+				});
+				
+				$routeProvider.otherwise( {
+					templateUrl: "/views/ideaList.html"
+				});
+			});
+		</script>
+		<script src="controllers/ideaBox.js"></script>
+		<script src="filters/customFilters.js"></script>
+		<script src="controllers/ideasListControllers.js"></script>
+		<script src="ngmodules/angular-route.js"></script>
+		<style>
+			.navbar-right { float: right !important; margin-right: 5px;}
+			.navbar-text { margin-right: 10px; }
+		</style>
+	</head>
+	<body ng-controller="ideasCtrl">
+		<div class="navbar navbar-inverse">
+			<a class="navbar-brand" href="#">Idea box</a>
+			<a href="#/createidea" class="btn btn-default navbar-right navbar-btn">Create a new idea</a>
+		</div>
+		<div class="alert alert-danger" ng-show="data.error">
+			Error {{data.error.status}}. The idea data was not loaded.
+			<a href="/app.html" class="alert-link">Click here to try again</a>
+		</div>
+		<ng-view />
+	</body>
+</html>
