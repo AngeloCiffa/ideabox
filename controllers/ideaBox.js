@@ -1,48 +1,12 @@
 angular.module("ideaBox")
-.constant("dataUrl", "http://localhost/package.json")
-.controller("ideasCtrl", function ($scope, $http, $location, dataUrl) {
+
+.controller("ideasCtrl", function ($scope, $location, ideaService) {
 
 	
-	$scope.data = {};
-
-	$http.get(dataUrl)
-		.success(function (data){
-			
-			$scope.data = {
-							selectedIdea: {},
-							ideas: [
-							{ name: "Idea #1", description: "A product",
-							category: "Category #1", author: "random author", votes: 0 },
-							{ name: "Idea #2", description: "A product",
-							category: "Category #1", author: "random author2", votes: 10 },
-							{ name: "Idea #3", description: "A product",
-							category: "Category #1", author: "random author", votes: 0 },
-							{ name: "Idea #4", description: "A product",
-							category: "Category #2", author: "random author2", votes: 0 },
-							{ name: "Idea #5", description: "A product",
-							category: "Category #2", author: "random author2", votes: 0 }
-							]}
-		})
-		.error(function (error){
-			
-			$scope.data = {
-
-							//error: error,
-							selectedIdea: {},
-							ideas: [							
-							{ name: "Idea #1", description: "A product",
-							category: "Category #1", author: "random author", votes: 0 },
-							{ name: "Idea #2", description: "A product",
-							category: "Category #1", author: "random author2", votes: 10 },
-							{ name: "Idea #3", description: "A product",
-							category: "Category #1", author: "random author", votes: 0 },
-							{ name: "Idea #4", description: "A product",
-							category: "Category #2", author: "random author2", votes: 0 },
-							{ name: "Idea #5", description: "A product",
-							category: "Category #2", author: "random author2", votes: 0 }
-							]
-						}
-		});	
+	//TODO use the promise
+	$scope.data = {
+		ideas: ideaService.getIdeas()
+	};
 
 	$scope.saveIdea = function (ideaDetails){
 		var idea = angular.copy(ideaDetails);
@@ -61,19 +25,18 @@ angular.module("ideaBox")
 			
 		}
 
-		$scope.removeIdea = function (){
-		
-			if($scope.selectedIdea !== undefined && $scope.selectedIdea !== null)
-			{
-				$scope.data.ideas.remove($scope.selectedIdea);
-				$location.path("/ideas");			
-			}
+	$scope.removeIdea = function (){
+	
+		if($scope.selectedIdea !== undefined && $scope.selectedIdea !== null)
+		{
+			$scope.data.ideas.remove($scope.selectedIdea);
+			$location.path("/ideas");			
 		}
+	}
 
 	$scope.getIdeaDetails = function(ideaDetails){
 
-		var idea = angular.copy(ideaDetails);
-		$scope.data.selectedIdea = idea;
+		$scope.data.selectedIdea = ideaService.getIdea(ideaDetails.id);
 
 		$location.path("/ideaDetails");
 	}
@@ -81,4 +44,4 @@ angular.module("ideaBox")
 	$scope.upVote = function (idea){
 			idea.votes++;			
 		}
-	});
+});

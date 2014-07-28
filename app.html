@@ -5,6 +5,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script><!-- load angular -->
 		<link href="bootstrap.css" rel="stylesheet" />
 		<link href="bootstrap-theme.css" rel="stylesheet" />
+		<script src="filters/customFilters.js"></script>
 		<script>
 			angular.module("ideaBox", ["customFilters", "ngRoute"])
 			.config( function ($routeProvider){
@@ -26,9 +27,12 @@
 				});
 			});
 		</script>
+
+	
+		<script src="components/ideaService.js"></script>
 		<script src="controllers/ideaBox.js"></script>
-		<script src="filters/customFilters.js"></script>
-		<script src="controllers/ideasListControllers.js"></script>
+		<script src="controllers/ideaListControllers.js"></script>
+		<script src="controllers/ideaDetailsControllers.js"></script>
 		<script src="ngmodules/angular-route.js"></script>
 		<style>
 			.navbar-right { float: right !important; margin-right: 5px;}
