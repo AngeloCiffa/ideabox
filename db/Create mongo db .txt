@@ -1,0 +1,8 @@
+db.ideas.dropDatabase();
+db.ideas.insert([
+						{ "name": "Build an app", "description": "Let's build an awesome app","category": "Development", "author": "User 1", "votes": 0 },
+						{ "name": "Build a web app", "description": "Let's build an awesome web app", "category": "Development", "author": "User 1", "votes": 10 },
+						{ "name": "Be awesome", "description": "Let's try to look awesome", "category": "Mindset", "author": "User 3", "votes": 0 },
+						{ "name": "Clean our desks", "description": "We should clean our desks, this will ensure that we look awesome", "category": "Behaviour", "author": "User 1", "votes": 0 },
+						{ "name": "Be happy", "description": "If we are happy, we will look awesome", "category": "Mindset", "author": "User 2", "votes": 0 }
+					]);

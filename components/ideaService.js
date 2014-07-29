@@ -1,18 +1,10 @@
 angular.module("ideaBox")
-.constant("dataUrl", "http://localhost/package.json")
+.constant("dataUrl", "http://localhost:5000/api/ideas")
 .factory("ideaService", function ($http, dataUrl){
-	var ideaData =  [
-						{ id: 1, name: "Idea #1", description: "A product",
-						category: "Category #1", author: "random author", votes: 0 },
-						{ id: 2, name: "Idea #2", description: "A product",
-						category: "Category #1", author: "random author2", votes: 10 },
-						{ id: 3,name: "Idea #3", description: "A product",
-						category: "Category #1", author: "random author", votes: 0 },
-						{ id: 4,name: "Idea #4", description: "A product",
-						category: "Category #2", author: "random author2", votes: 0 },
-						{ id: 5,name: "Idea #5", description: "A product",
-						category: "Category #2", author: "random author2", votes: 0 }
-					];
+
+	var ideaData = {};
+	var error = {};
+
 
 	return {
 				createIdea: function (newIdeaName, newIdeaCategory, newIdeaAuthor, newIdeaDescription) {
@@ -31,9 +23,14 @@ angular.module("ideaBox")
 							}
 						}
 				},
-				getIdeas: function(){
-					//TODO do the actual call to the http service
-					return ideaData;
+				getIdeas: function(){					
+					return $http.get(dataUrl)
+						.success(function (data){
+							ideaData = data;
+						})
+						.error(function(err){
+							error = err;
+						});
 				},
 				getIdea: function (ideaID){
 					
@@ -42,5 +39,5 @@ angular.module("ideaBox")
 							return ideaData[i];
 					};
 				}
-			}
+			};
 });

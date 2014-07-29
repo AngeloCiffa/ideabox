@@ -3,9 +3,15 @@ angular.module("ideaBox")
 .controller("ideasCtrl", function ($scope, $location, ideaService) {
 
 	
-	//TODO use the promise
-	$scope.data = {
-		ideas: ideaService.getIdeas()
+	// //TODO use the promise
+	// $scope.data = {
+	// 	ideas: ideaService.getIdeas()
+	// };
+
+	$scope.getIdeas = function (){
+		ideaService.getIdeas().success(function (data){
+			$scope.data = {ideas: data}
+		});
 	};
 
 	$scope.saveIdea = function (ideaDetails){
@@ -23,7 +29,7 @@ angular.module("ideaBox")
 			$scope.data.ideas.push(ideaDetails);
 			$location.path("/ideas");
 			
-		}
+		};
 
 	$scope.removeIdea = function (){
 	
@@ -32,16 +38,18 @@ angular.module("ideaBox")
 			$scope.data.ideas.remove($scope.selectedIdea);
 			$location.path("/ideas");			
 		}
-	}
+	};
 
 	$scope.getIdeaDetails = function(ideaDetails){
 
 		$scope.data.selectedIdea = ideaService.getIdea(ideaDetails.id);
 
 		$location.path("/ideaDetails");
-	}
+	};
 
 	$scope.upVote = function (idea){
 			idea.votes++;			
-		}
+		};
+
+	$scope.getIdeas();
 });
