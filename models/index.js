@@ -15,26 +15,41 @@ exports.Ideas = new Schema ({
     trim: true,
     max: 1000
   },
+  category: {
+    type: String,
+    trim: true,
+    max: 200
+  },
   votes: [{
     date: {
       type: Date,
       default: Date.now,
       required: true
     },
-    voter: {
-      id: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-      },
-      name: String
-    }
+    voter:  {
+    type: String,
+    trim: true,
+    max: 100
+    },
+    // voter: {
+    //   id: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User'
+    //   },
+    //   name: String
+    // }
   }],
+    // author: {
+  //   id: {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'User',
+  //     required: true
+  //   }
+  // },
   author: {
-    id: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    }
+    type: String,
+    trim: true,
+    max: 100
   },
   created: {
     type: Date,

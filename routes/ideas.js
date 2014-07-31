@@ -10,32 +10,54 @@ exports.getIdeas = function(req, res, next) {
 };
 
 exports.add = function(req, res, next) {
-  if (req.body) {
+
+// var cache = [];
+// var result = JSON.stringify(req, function(key, value) {
+//     if (typeof value === 'object' && value !== null) {
+//         if (cache.indexOf(value) !== -1) {
+//             // Circular reference found, discard key
+//             return;
+//         }
+//         // Store value in our collection
+//         cache.push(value);
+//     }
+//     return value;
+// });
+// cache = null;
+
+// 	console.log('New idea created: ' + result + req.body);
+  if (req.body) 
+  {
     req.db.Ideas.create({
       name: req.body.name,
       description: req.body.description || null,
-      category: req.body.category ,
-      author: {
-        id: 12121212,
-        name: req.body.author
-      },
+      category: req.body.category,
+      author:  req.body.author,      
       votes: 0
-    }, function(err, docs) {
-      if (err) {
+      },
+     function(err, docs) {
+      if (err) 
+      {
         console.error(err);
         next(err);
-      } else {
+      } 
+      else 
+      {
         res.json(200, docs);
       }
 
     });
-  } else {
+  } 
+  else
+  {
     next(new Error('No data'));
   }
 };
 
 exports.getIdea = function(req, res, next) {
-  if (req.params.id) {
+  if (req.params.id) 
+  {
+  	console.log('GET idea id: ' + req.params.id);
     req.db.Ideas.findById(req.params.id, {
       name: true,
       description: true,
@@ -44,18 +66,24 @@ exports.getIdea = function(req, res, next) {
       votes: true
     }, function(err, obj) {
       if (err) next(err);
-      if (!obj) {
+      if (!obj) 
+      {
         next('Nothing is found.');
-      } else {
+      } 
+      else
+      {
         res.json(200, obj);
       }
     });
-  } else {
+  }
+  else 
+  {
     next('No idea id');
   }
 };
 
 exports.del = function(req, res, next) {
+	console.log('DELETE idea id: ' + req.params.id);
   req.db.Ideas.findById(req.params.id, function(err, obj) {
     if (err) next(err);
       obj.remove();

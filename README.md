@@ -8,7 +8,7 @@ run mongod exec to your db folder inside the project.
 Open anoter cmd and run mongo
 
 	mongo
-
+	use ideaBoxDB
 
 
 NODE JS

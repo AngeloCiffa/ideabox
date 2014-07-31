@@ -1,6 +1,6 @@
 angular.module("ideaBox")
 
-.controller("ideasCtrl", function ($scope, $location, ideaService) {
+.controller("ideasCtrl", function ($scope, $state, $stateParams, ideaService) {
 
 	
 	// //TODO use the promise
@@ -16,40 +16,47 @@ angular.module("ideaBox")
 
 	$scope.saveIdea = function (ideaDetails){
 		var idea = angular.copy(ideaDetails);
-		
-		// $http.post(orderUrl, idea)
-		// 	.success(function (data) {
-		// 		$scope.data.ideaId = data.id;
-				
-		// 	})
-		// 	.error(function(error){
-		// 		$scope.data.ideaError = error;
-		// 	});
-			ideaDetails.votes = 0;
-			$scope.data.ideas.push(ideaDetails);
-			$location.path("/ideas");
-			
-		};
+		ideaService.createIdea(ideaDetails)
+			.success(function(data){
+				$scope.data.ideas.push(data);
+			})
+			.error(function (error){
+				//do something for error
+			});
+						
+			$state.go('list', {});
+	};
 
-	$scope.removeIdea = function (){
+	$scope.removeIdea = function (ideaId){
 	
-		if($scope.selectedIdea !== undefined && $scope.selectedIdea !== null)
-		{
-			$scope.data.ideas.remove($scope.selectedIdea);
-			$location.path("/ideas");			
-		}
+		ideaService.removeIdea(ideaId)
+			.success(function(data){
+				for (var i = 0; i < $scope.data.ideas.length; i++) {
+					if($scope.data.ideas[i]._id === data._id)
+					{
+						$scope.data.ideas.splice(i, 1);
+						break;
+					}
+				};
+			
+				$state.go('list', {});		
+			})
+			.error(function(error){
+					//do something for error
+			})
+
+			
 	};
 
 	$scope.getIdeaDetails = function(ideaDetails){
 
-		$scope.data.selectedIdea = ideaService.getIdea(ideaDetails.id);
-
-		$location.path("/ideaDetails");
+		$state.go('list.ideaDetails', { Id: ideaDetails._id });
+	
 	};
 
 	$scope.upVote = function (idea){
 			idea.votes++;			
-		};
+	};
 
 	$scope.getIdeas();
 });

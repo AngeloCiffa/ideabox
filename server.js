@@ -6,6 +6,12 @@ module.exports = router;
 
 var app = express();
 
+var bodyParser = require ("body-parser");
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+// parse application/json
+app.use(bodyParser.json())
+
 //Error handling
 
 app.use(logErrors);
@@ -62,10 +68,10 @@ var db = function (req, res, next) {
 
 //IDEAS
 app.get('/api/ideas', db, routes.ideas.getIdeas);
-app.post('/api/ideas', db, routes.ideas.add);
-app.get('/api/ideas/:id', db, routes.ideas.getIdea);
+app.post('/api/idea', db, routes.ideas.add);
+app.get('/api/idea/:id', db, routes.ideas.getIdea);
 //app.put('/api/ideas/:id', db, routes.ideas.updatePost);
-app.delete('/api/ideas/:id', db, routes.ideas.del);
+app.delete('/api/idea/:id', db, routes.ideas.del);
 
 /////////////////
 //NODE related

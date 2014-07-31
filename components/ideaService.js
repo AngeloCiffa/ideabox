@@ -1,43 +1,50 @@
 angular.module("ideaBox")
 .constant("dataUrl", "http://localhost:5000/api/ideas")
-.factory("ideaService", function ($http, dataUrl){
+.constant("ideaUrl", "http://localhost:5000/api/idea/")
+.factory("ideaService", function ($http, dataUrl, ideaUrl){
 
 	var ideaData = {};
 	var error = {};
 
 
 	return {
-				createIdea: function (newIdeaName, newIdeaCategory, newIdeaAuthor, newIdeaDescription) {
-				//TODO replace the id by what the http service call will return to us						
-					ideaData.push({id: 1, category: newIdeaCategory, author: newIdeaAuthor, name: newIdeaName});								
+				createIdea: function (newIdea) {
+					return $http.post("/api/idea", newIdea)
+							.success(function (data) {
+								return data;
+								
+							})
+							.error(function(error){
+								return error;
+							});						
 				},
-				removeIdea: function (id){
-					//TODO call the http service to remove the data 
-
-						for (var i = 0; i < ideaData.length; i++) 
-						{
-							if(ideaData[i].id == id)
-							{
-								ideaData.splice(i, 1);
-								break;
-							}
-						}
+				removeIdea: function (ideaId){
+					return $http.delete(ideaUrl + ideaId)
+						.success(function (data){
+							return data;
+						})
+						.error(function(err){
+							error = err;
+						});	
 				},
 				getIdeas: function(){					
 					return $http.get(dataUrl)
 						.success(function (data){
-							ideaData = data;
+							return data;
 						})
 						.error(function(err){
 							error = err;
 						});
 				},
-				getIdea: function (ideaID){
-					
-					for (var i = 0; i < ideaData.length; i++) {
-						if(ideaData[i].id === ideaID)
-							return ideaData[i];
-					};
+				getIdea: function (ideaId){
+
+					return $http.get(ideaUrl + ideaId)
+					.success(function(data){
+						return data;
+					})
+					.error(function(err){
+						error = err;
+					});
 				}
 			};
 });

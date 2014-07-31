@@ -1,26 +1,27 @@
+<div ui-view/>
 <h2>Idea details</h2>
-<div class="well" ng-controller="ideaDetailsCtrl">
+<div class="well">
 	<h3>Name</h3>
 	<div class="form-group">			
-		<label name="title" class="form-control" ng-bind="data.selectedIdea.name" />			
+		{{data.selectedIdea.name}}		
 	</div>
 	<h3>Category</h3>
 	<div class="form-group">		
-		<label name="category" class="form-control" ng-bind="data.selectedIdea.category" />
+		{{data.selectedIdea.category}}
 	</div>
 	<h3>Description</h3>
 	<div class="form-group">	
-		<label name="description" class="form-control" ng-bind="data.selectedIdea.description"/>
+		{{data.selectedIdea.description}}
 	</div>
 	<h3>Author</h3>
 	<div class="form-group">		
-		<label name="author" class="form-control" ng-bind="data.selectedIdea.author" />
+		{{data.selectedIdea.author}}
 	</div>	
 	<h3>Votes</h3>
 	<div class="form-group">		
-		<label name="votes" class="form-control" ng-bind="data.selectedIdea.votes" />
+		{{data.selectedIdea.votes}}
 	</div>		
 	<div class="text-center">
-		<button ng-click="removeIdea()" class="btn btn-danger">Delete the idea</button>
+		<button ng-click="removeIdea(data.selectedIdea._id)" class="btn btn-danger">Delete the idea</button>
 	</div>
 </div>

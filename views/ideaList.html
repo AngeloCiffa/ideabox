@@ -1,10 +1,13 @@
-<div class="panel panel-default row" ng-controller="ideasListCtrl" ng-hide="data.error">
-	<div class="col-xs-11">
-		<input></input>
-	</div>
-</div>
-<div class="panel panel-default row" ng-controller="ideasListCtrl" ng-hide="data.error">
+<div ui-view/>
+<div class="panel panel-default row" ng-hide="data.error">
+
 	<div class="col-xs-3">
+		<div>
+			<h3>Filters</h3>		
+      		Search: 
+			<input class="form-control" ng-model="query"></input>
+			
+		</div>
 		<a ng-click="selectCategory()" class="btn btn-block btn-default btn-lg">All</a>
 		<a ng-repeat="item in data.ideas | orderBy:'category' | unique:'category'" ng-class ="getCategoryClass(item)"
 		   ng-click= "selectCategory(item)" class= "btn btn-block btn-default btn-lg" >

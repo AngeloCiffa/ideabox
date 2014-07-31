@@ -6,7 +6,7 @@ angular.module("customFilters", [])
 					var keys = {};
 					for(var i = 0; i < data.length; i++){
 						var val = data[i][propertyName];
-						if(angular.isUndefined(keys[val])){
+						if(val.length > 0 && angular.isUndefined(keys[val])){
 							keys[val] = true;
 							results.push(val);
 						}
