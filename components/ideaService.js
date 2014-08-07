@@ -1,6 +1,6 @@
 angular.module("ideaBox")
-.constant("dataUrl", "http://localhost:5000/api/ideas")
-.constant("ideaUrl", "http://localhost:5000/api/idea/")
+.constant("dataUrl", "/api/ideas")
+.constant("ideaUrl", "/api/idea/")
 .factory("ideaService", function ($http, dataUrl, ideaUrl){
 
 	var ideaData = {};
