@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="ideaBox">
+	<head>
+		<title>Idea box</title>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script><!-- load angular -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+		<link href="bootstrap.css" rel="stylesheet" />
+		<link href="bootstrap-theme.css" rel="stylesheet" />
+		<script src="filters/customFilters.js"></script>
+		<script>
+			angular.module("ideaBox", ["customFilters", 'ui.router'])
+			.config( function ($stateProvider, $urlRouterProvider){
+
+				$urlRouterProvider.otherwise('/');
+
+				$stateProvider
+        
+		        // HOME STATES AND NESTED VIEWS ========================================
+		        .state('list', {
+		            url: '/',
+		            templateUrl: '/views/ideaList.html',
+		            controller: 'ideasListCtrl'
+		        })
+
+		        .state('list.ideaDetails', {
+		        	url:'/ideaDetails/:Id',
+		        	templateUrl: '/views/ideaDetails.html',
+		        	controller: 'ideaDetailsCtrl'
+		        })
+
+		        .state ('createIdea', {
+		        	url:'/createIdea',
+		        	templateUrl: '/views/createIdea.html'
+		        });
+		         
+		 
+
+				// $routeProvider.when("/ideaDetails", {
+				// 	templateUrl: "/views/ideaDetails.html"
+				// });
+
+				// $routeProvider.when("/createidea", {
+				// 	templateUrl: "/views/createIdea.html"
+				// });
+				
+				// $routeProvider.when("/ideas", {
+				// 	templateUrl: "/views/ideaList.html"
+				// });
+				
+				// $routeProvider.otherwise( {
+				// 	templateUrl: "/views/ideaList.html"
+				// });
+
+
+			});
+		</script>
+
+	
+		<script src="components/ideaService.js"></script>
+		<script src="controllers/ideaBox.js"></script>
+		<script src="controllers/ideaListControllers.js"></script>
+		<script src="controllers/ideaDetailsControllers.js"></script>		
+		<style>
+			.navbar-right { float: right !important; margin-right: 5px;}
+			.navbar-text { margin-right: 10px; }
+		</style>
+	</head>
+	<body ng-controller="ideasCtrl">
+		<div class="navbar navbar-inverse">
+			<a class="navbar-brand" href="#">Idea box</a>
+			<a ui-sref="createIdea" class="btn btn-default navbar-right navbar-btn">Create a new idea</a>
+		</div>
+		<div class="alert alert-danger" ng-show="data.error">
+			Error {{data.error.status}}. The idea data was not loaded.
+			<a href="/app.html" class="alert-link">Click here to try again</a>
+		</div>
+		<div ui-view/>
+	</body>
+</html>
