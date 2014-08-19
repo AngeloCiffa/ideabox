@@ -45,6 +45,16 @@ angular.module("ideaBox")
 					.error(function(err){
 						error = err;
 					});
+				},
+				upVote: function (ideaId){
+
+					return $http.post("api/vote/" + ideaId)
+					.success(function(data){
+						return data;
+					})
+					.error(function(err){
+						error = err;
+					});
 				}
 			};
 });

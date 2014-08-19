@@ -55,7 +55,14 @@ angular.module("ideaBox")
 	};
 
 	$scope.upVote = function (idea){
-			idea.votes++;			
+			
+			ideaService.upVote(idea._id)
+			.success(function(data){
+				idea.votes++;
+			})
+			.error(function (error){
+				//do something for error
+			});		
 	};
 
 	$scope.getIdeas();

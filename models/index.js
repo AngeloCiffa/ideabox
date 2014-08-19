@@ -20,24 +20,11 @@ exports.Ideas = new Schema ({
     trim: true,
     max: 200
   },
-  votes: [{
-    date: {
-      type: Date,
-      default: Date.now,
-      required: true
-    },
-    voter:  {
-    type: String,
-    trim: true,
-    max: 100
-    },
-    // voter: {
-    //   id: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    //   },
-    //   name: String
-    // }
+  votes: [{ 
+      id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Votes'
+      }    
   }],
     // author: {
   //   id: {
@@ -62,6 +49,26 @@ exports.Ideas = new Schema ({
     required: true
   }
 });
+
+exports.Votes = new Schema({
+   date: {
+      type: Date,
+      default: Date.now,
+      required: true
+    },
+    voter:  {
+    type: String,
+    trim: true,
+    max: 100
+    },
+    // voter: {
+    //   id: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User'
+    //   },
+    //   name: String
+    // }
+})
 
 exports.User = new Schema({
   

@@ -33,7 +33,7 @@ exports.add = function(req, res, next) {
       description: req.body.description || null,
       category: req.body.category,
       author:  req.body.author,      
-      votes: 0
+      votes: []
       },
      function(err, docs) {
       if (err) 
@@ -89,4 +89,30 @@ exports.del = function(req, res, next) {
       obj.remove();
       res.json(200, obj);
     })
+};
+
+exports.upVote = function (req, res, next) {
+  console.log ('POST vote counted in for id:' + req.params.id);
+
+  req.db.Votes.create({
+      voter: 'testestest'
+      },
+     function(err, docs) {
+      if (err) 
+      {
+        console.error(err);
+        next(err);
+      } 
+      else
+      {
+         console.log ('docs' + docs);
+         req.db.Ideas.update( { _id: req.params.id },
+                       { $addToSet: {votes: docs._id} } );
+      
+      }    
+
+    });
+
+    res.json(200);  
+
 };

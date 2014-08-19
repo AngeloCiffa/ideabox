@@ -56,7 +56,8 @@ connection.once('open', function () {
 var models = require('./models');
 var db = function (req, res, next) {
   req.db = {      
-    Ideas: connection.model('Ideas', models.Ideas, 'ideas')
+    Ideas: connection.model('Ideas', models.Ideas, 'ideas'),
+    Votes: connection.model('Votes', models.Votes, 'votes')
   };
   return next();
 }
@@ -72,7 +73,7 @@ app.post('/api/idea', db, routes.ideas.add);
 app.get('/api/idea/:id', db, routes.ideas.getIdea);
 //app.put('/api/ideas/:id', db, routes.ideas.updatePost);
 app.delete('/api/idea/:id', db, routes.ideas.del);
-
+app.post('/api/vote/:id', db, routes.ideas.upVote);
 /////////////////
 //NODE related
 ////////////////

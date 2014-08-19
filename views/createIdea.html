@@ -4,29 +4,29 @@
 	span.error { color: red; font-weight: bold; }
 </style>
 <div ui-view/>
-<h2>Create a new idea</h2>
+<h3>Create a new idea</h3>
 <p>Please enter the idea details</p>
 <form name="ideaForm" novalidate>
 	<div class="well">
-		<h3>Name</h3>
+		<h4>Name</h4>
 		<div class="form-group">			
 			<input name="name" class="form-control" ng-model="data.idea.name" required />
 			<span class="error" ng-show="ideaForm.name.$error.required">Please enter a name.</span>
 		</div>
-		<h3>Category</h3>
+		<h4>Category</h4>
 		<div class="form-group">			
 			<input name="category" class="form-control" ng-model="data.idea.category" required />
 			<span class="error" ng-show="ideaForm.category.$error.required">Please enter a category.</span>
 		</div>
-		<h3>Description</h3>
-		<div class="form-group">			
-			<input name="description" class="form-control" ng-model="data.idea.description" required/>
+		<h4>Description</h4>
+		<div class="form-group">		
+			<textarea name="description" class="form-control" rows="3"  ng-model="data.idea.description" required></textarea>	
 			<span class="error" ng-show ="ideaForm.description.$error.required">Please enter a description.</span>
 		</div>
-		<h3>Author</h3>
+		<h4>Author</h4>
 		<div class="form-group">			
 			<input name="author" class="form-control" ng-model="data.idea.author" required>
-			<span class="error" ng-show="ideaForm.author.$error.required"> Please enter a author.</span>
+			<span class="error" ng-show="ideaForm.author.$error.isdirty && ideaForm.author.$error.required"> Please enter a author.</span>
 		</div>		
 		<div class="text-center">
 			<button ng-disabled ="ideaForm.$invalid" ng-click="saveIdea(data.idea)" class="btn btn-primary">Save the idea</button>
