@@ -56,8 +56,8 @@ connection.once('open', function () {
 var models = require('./models');
 var db = function (req, res, next) {
   req.db = {      
-    Ideas: connection.model('Ideas', models.Ideas, 'ideas'),
-    Votes: connection.model('Votes', models.Votes, 'votes')
+    Ideas: connection.model('Ideas', models.Ideas, 'ideas')
+ /*   ,Votes: connection.model('Votes', models.Votes, 'votes')*/
   };
   return next();
 }

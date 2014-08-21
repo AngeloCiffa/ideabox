@@ -94,25 +94,44 @@ exports.del = function(req, res, next) {
 exports.upVote = function (req, res, next) {
   console.log ('POST vote counted in for id:' + req.params.id);
 
-  req.db.Votes.create({
-      voter: 'testestest'
-      },
-     function(err, docs) {
-      if (err) 
+  // req.db.Votes.create({
+  //     voter: 'testestest'
+  //     },
+  //    function(err, docs) {
+  //     if (err) 
+  //     {
+  //       console.error(err);
+  //       next(err);
+  //     } 
+  //     else
+  //     {
+  //        console.log ('docs' + docs);
+         // var r = req.db.Ideas.update(
+         //  { _id: req.params.id },
+         //  { 
+         //    name: "toto"
+         //  }
+         // );
+      
+    //req.db.Ideas.findByIdAndUpdate(req.params.id, { name: "toto" });
+    //  ,  function(err, obj) {
+    // if (err) next(err);
+    //   obj.update(req.params.id, {name: "toto"});
+    //   res.json(200, obj);
+    // })
+
+
+req.db.Ideas.findById(req.params.id, function (err, doc) {
+  if (err) 
       {
         console.error(err);
         next(err);
       } 
-      else
-      {
-         console.log ('docs' + docs);
-         req.db.Ideas.update( { _id: req.params.id },
-                       { $addToSet: {votes: docs._id} } );
-      
-      }    
-
-    });
-
+     doc.votes.push({voter : "thisisawesomeuser"});
+     doc.save(function(data){
+     console.log("Saved!!!!!")
+  });
+});
     res.json(200);  
 
 };

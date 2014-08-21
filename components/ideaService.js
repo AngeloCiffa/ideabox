@@ -5,9 +5,10 @@ angular.module("ideaBox")
 
 	var ideaData = {};
 	var error = {};
-
+ 	var status = { lastVotedId: 0 };
 
 	return {
+				status: status,
 				createIdea: function (newIdea) {
 					return $http.post("/api/idea", newIdea)
 							.success(function (data) {
@@ -50,6 +51,7 @@ angular.module("ideaBox")
 
 					return $http.post("api/vote/" + ideaId)
 					.success(function(data){
+						status.lastVotedId = ideaId;
 						return data;
 					})
 					.error(function(err){

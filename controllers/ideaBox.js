@@ -58,7 +58,7 @@ angular.module("ideaBox")
 			
 			ideaService.upVote(idea._id)
 			.success(function(data){
-				idea.votes++;
+				idea.votes.push(data._id);
 			})
 			.error(function (error){
 				//do something for error

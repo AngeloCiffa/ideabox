@@ -1,8 +1,71 @@
 db.ideas.dropDatabase();
+db.user.dropDatabase();
+
+
 db.ideas.insert([
-						{ "name": "Build an app", "description": "Let's build an awesome app","category": "Development", "author": "User 1", "votes": 0 },
-						{ "name": "Build a web app", "description": "Let's build an awesome web app", "category": "Development", "author": "User 1", "votes": 10 },
-						{ "name": "Be awesome", "description": "Let's try to look awesome", "category": "Mindset", "author": "User 3", "votes": 0 },
-						{ "name": "Clean our desks", "description": "We should clean our desks, this will ensure that we look awesome", "category": "Behaviour", "author": "User 1", "votes": 0 },
-						{ "name": "Be happy", "description": "If we are happy, we will look awesome", "category": "Mindset", "author": "User 2", "votes": 0 }
-					]);
+					{ 
+					    "name": "Build an app", 
+						"description": "Let's build an awesome app",
+						"category": "Development",
+						"author": "User 1",
+						"votes": [
+									{
+									  "_id" : ObjectId("53f5c67849b878e0024f5ab3"),
+									  "voter" : "testestest",
+									  "date" : ISODate("2014-08-21T10:14:16.693Z") 
+									},
+									{
+									  "_id" : ObjectId("53f5c67849b878e0024f5ab5"),
+									  "voter" : "testestest",
+									  "date" : ISODate("2014-08-21T10:14:16.846Z")
+									},
+
+									{
+									  "_id" : ObjectId("53f5c67949b878e0024f5ab7"),
+									  "voter" : "testestest",
+									  "date" : ISODate("2014-08-21T10:14:17.015Z")
+									}
+								 ]
+					},
+
+					{ 
+						"name": "Build a web app",
+						"description": "Let's build an awesome web app",
+						"category": "Development",
+						"author": "User 1",
+						"votes": [
+									{
+									  "_id" : ObjectId("53f5c67949b878e0024f5ab9"),
+									  "voter" : "testestest",
+									  "date" : ISODate("2014-08-21T10:14:17.184Z")
+									}
+								 ]
+					},
+					{ 
+						"name": "Be awesome",
+						"description": "Let's try to look awesome",
+						"category": "Mindset", 
+						"author": "User 3",
+						"votes": []
+					},
+					{ 
+						"name": "Clean our desks",
+						"description": "We should clean our desks, this will ensure that we look awesome", 
+						"category": "Behaviour",
+						"author": "User 1",
+						"votes": []
+					},
+					{ 
+						"name": "Be happy",
+						"description": "If we are happy, we will look awesome",
+						"category": "Mindset",
+						"author": "User 2",
+						"votes": [
+									{
+									  "_id" : ObjectId("53f5c67949b878e0024f5abb"),
+									  "voter" : "testestest",
+									  "date" : ISODate("2014-08-21T10:14:17.502Z")
+									}
+								 ]
+					}
+				]);
