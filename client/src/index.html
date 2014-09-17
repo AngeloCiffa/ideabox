@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="ideaBox" ng-strict-di>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <title>Idea box</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <style>
+  .navbar-right {
+    float: right !important;
+    margin-right: 5px;
+  }
+  .navbar-text {
+    margin-right: 10px;
+  }
+  </style>
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+
+<body  ng-controller="ideasCtrl">
+  <div class="navbar navbar-inverse">
+    <a class="navbar-brand" href="#">Idea box</a>
+    <a ui-sref="createIdea" class="btn btn-default navbar-right navbar-btn">Create a new idea</a>
+  </div>
+  <div class="alert alert-danger" ng-show="data.error">
+    Error {{data.error.status}}. The idea data was not loaded.
+    <a href="/index.html" class="alert-link">Click here to try again</a>
+  </div>
+  <div ui-view/>
+    <!-- inject:js -->
+  <!-- endinject -->
+</body>
+
+</html>
+ 

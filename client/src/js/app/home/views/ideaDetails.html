@@ -1,0 +1,27 @@
+<div ui-view/>
+<h3>Idea details</h3>
+<div class="well">
+    <h4>Name</h4>
+    <div class="form-group">
+        {{data.selectedIdea.name}}
+    </div>
+    <h4>Category</h4>
+    <div class="form-group">
+        {{data.selectedIdea.category}}
+    </div>
+    <h4>Description</h4>
+    <div class="form-group">
+        {{data.selectedIdea.description}}
+    </div>
+    <h4>Author</h4>
+    <div class="form-group">
+        {{data.selectedIdea.author}}
+    </div>
+    <h4>Votes</h4>
+    <div class="form-group">
+        {{data.selectedIdea.votes.length}}
+    </div>
+    <div class="text-center">
+        <button ng-click="removeIdea(data.selectedIdea._id)" class="btn btn-danger">Delete the idea</button>
+    </div>
+</div>

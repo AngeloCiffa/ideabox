@@ -3,7 +3,7 @@ MONGO DB setup
 run mongod exec to your db folder inside the project.
 
 
- 	mongod --dbpath C:\Git\POC\MDLIdeas\db
+ 	mongod --dbpath C:\Git\POC\MDLIdeas\server\db
 
 Open anoter cmd and run mongo
 
