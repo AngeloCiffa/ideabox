@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="ideaBox" ng-strict-di>
+<html ng-app="ideaBox">
 
 <head>
   <meta charset="utf-8">
@@ -21,19 +21,88 @@
   <!-- endinject -->
 </head>
 
-<body  ng-controller="ideasCtrl">
-  <div class="navbar navbar-inverse">
-    <a class="navbar-brand" href="#">Idea box</a>
-    <a ui-sref="createIdea" class="btn btn-default navbar-right navbar-btn">Create a new idea</a>
+<body ng-controller="ideasCtrl">
+  <header class="header">
+    <a ui-sref="list" class="logo">Idea Box</a>
+    <nav class="navbar navbar-static-top" role="navigation">
+      <a class="navbar-btn sidebar-toggle" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="navbar-right">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a class="dropdown-toggle">
+              <i class="glyphicon glyphicon-user"></i>
+              <span>
+                Anonymous <i class="caret"></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="wrapper row-offcanvas row-offcanvas-left">
+    <aside class="left-side sidebar-off-canvas">
+      <section class="sidebar">
+        <ul class="sidebar-menu">
+          <li ui-sref-active="active">
+            <a ui-sref="createIdea">
+              <i class="fa fa-lightbulb-o"></i>
+              <span>Create a new idea</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="input-group">
+          <input type="text" ng-model="query" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>
+      </section>
+      <section class="sidebar">
+        <ul class="sidebar-menu">
+          <a href="#">
+            <i class="fa fa-th"></i> 
+            <span>Filters</span>
+            <i class="fa pull-right fa-angle-down"></i>
+          </a>
+          <ul class="treeview-menu" style="display: block;">
+            <li class="active">
+              <a ng-click="selectCategory()" ng-class="getCategoryClass(item)" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> All</a>
+            </li>
+
+            <li ng-repeat="item in data.ideas | orderBy:'category' | unique:'category'" ng-class="getCategoryClass(item)" ng-click="selectCategory(item)">
+              <a style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> {{item}}</a>
+            </li>
+
+
+          </ul>
+
+        </ul>
+
+
+      </section>
+    </aside>
+    <aside class="right-side">
+
+      <section class="alert alert-danger" ng-show="data.error">
+        <i class="fa fa-ban"></i>
+        <b>Error</b> {{data.error.status}}. A problem occured meanwhile loading the ideas data.
+        <a href="/index.html" class="alert-link">Click here to try again</a>
+      </section>
+      <section class="content" ui-view>
+        <!-- inject:js -->
+        <!-- endinject -->
+      </section>
+    </aside>
   </div>
-  <div class="alert alert-danger" ng-show="data.error">
-    Error {{data.error.status}}. The idea data was not loaded.
-    <a href="/index.html" class="alert-link">Click here to try again</a>
-  </div>
-  <div ui-view/>
-    <!-- inject:js -->
-  <!-- endinject -->
 </body>
 
+
 </html>
- 

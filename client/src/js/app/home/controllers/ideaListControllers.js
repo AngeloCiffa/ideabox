@@ -1,7 +1,7 @@
 (function () {
   angular.module('ideaBox')
     .constant('ideasListActiveClass', 'btn-primary')
-    .constant('ideasListPageCount', 3)
+    .constant('ideasListPageCount', 10)
     .controller('ideasListCtrl', function ($scope, $filter, ideasListActiveClass, ideasListPageCount) {
 
       var selectedCategory = null;
